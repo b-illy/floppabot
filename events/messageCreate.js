@@ -8,8 +8,14 @@ export default (client, message) => {
         message.args = args;
 
         if (client.commands.get(command)) {
-            // add content.messageReference to make this message a reply
+            // if content is string, convert to object
             let content = client.commands.get(command).run(client, null, message, message.member, message.channel).content;
+            if (typeof content == "string") {
+                content = {
+                    content: content
+                }
+            }
+            // add content.messageReference to make this message a reply
             content.messageReference = {
                 messageID: message.id,
                 failIfNotExists: false
