@@ -1,0 +1,17 @@
+{
+  "name": "floppabot",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "author": "billy",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "eris": "^0.17.1"
+  }
+}
