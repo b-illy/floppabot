@@ -8,7 +8,14 @@ export default (client, message) => {
         message.args = args;
 
         if (client.commands.get(command)) {
-            client.commands.get(command).run(client, null, message);
+            message.channel.createMessage({
+                content: client.commands.get(command).run(client, null, message, message.member, message.channel).content,
+                file: client.commands.get(command).run(client, null, message, message.member, message.channel).file ?? null,
+                messageReference: {
+                    messageID: message.id,
+                    failIfNotExists: false
+                }
+            });
         } else {
             return;
         }

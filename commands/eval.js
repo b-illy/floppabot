@@ -9,50 +9,33 @@ export default {
             required: true
         }
     ],
-    run: (client, interaction, message) => {
-        if (interaction) {
-            if (interaction.member.id != process.env.OWNER) {
-                interaction.createMessage("This command is only for the bot owner");
-                return;
-            } else {
-                interaction.acknowledge().then(() => {
-                    const code = interaction.data.options.find(n => n.name == "code").value;
-                    try {
-                        const output = `\`\`\`js\n${eval(code)}\n\`\`\``;
-                        if (output.length >= 2000) {
-                            interaction.createFollowup({
-                                text: "The result was too large, so here it is as a file:",
-                                file: eval(code),
-                                name: "result.txt"
-                            });
-                        } else {
-                            interaction.createFollowup(output);
-                        }
-                    } catch (err) {
-                        interaction.createFollowup(`\`\`\`\n${err}\n\`\`\``);
-                    }
-                });
-            }
+    run: (client, interaction, message, member, channel) => {
+        if (member.id != process.env.OWNER) {
+            return { content: "This command is only for the bot owner" };
         } else {
-            if (message.member.id != process.env.OWNER) {
-                message.channel.createMessage("This command is only for the bot owner");
-                return;
+            let code;
+            if (message) {
+                code = message.args.join(" ");
             } else {
-                const code = message.args.join(" ");
-                try {
-                    const output = `\`\`\`js\n${eval(code)}\n\`\`\``;
-                    if (output.length >= 2000) {
-                        message.channel.createMessage({
-                            text: "The result was too large, so here it is as a file:",
-                            file: eval(code),
-                            name: "result.txt"
-                        });
-                    } else {
-                        message.channel.createMessage(output);
-                    }
-                } catch (err) {
-                    message.channel.createMessage(`\`\`\`\n${err}\n\`\`\``);
+                code = interaction.data.options.find(n => n.name == "code").value;
+            }
+
+            try {
+                const evaled = eval(code);
+                const output = `\`\`\`js\n${evaled}\n\`\`\``;
+                if (output.length >= 2000) {
+                    return {
+                        content: "Output was too large, see attached file instead",
+                        file: {
+                            file: evaled,
+                            name: "output.txt"
+                        }
+                    };
+                } else {
+                    return { content: output };
                 }
+            } catch (err) {
+                return { content: `\`\`\`\n${err}\n\`\`\`` };
             }
         }
     }
