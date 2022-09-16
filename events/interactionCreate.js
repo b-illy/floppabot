@@ -9,10 +9,12 @@ export default (client, i) => {
                 return;
             }
             i.acknowledge().then(() => {
-                i.createFollowup({
-                    content: client.commands.get(i.data.name).run(client, i, null, i.member, i.channel).content,
-                    file: client.commands.get(i.data.name).run(client, i, null, i.member, i.channel).file ?? null
-                });
+                i.createFollowup(
+                    // content
+                    client.commands.get(i.data.name).run(client, i, null, i.member, i.channel).content,
+                    // file
+                    client.commands.get(i.data.name).run(client, i, null, i.member, i.channel).file ?? null
+                );
             });
             break;
         case 3:  // message component
