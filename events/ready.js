@@ -1,6 +1,6 @@
 import fs from "fs";
 
-export default (client) => {
+export default async (client) => {
     console.log(`Now ready on ${client.user.username}#${client.user.discriminator}, loading commands...`);
     
     // register/load commands from commands directory

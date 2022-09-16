@@ -15,10 +15,9 @@ const eventFiles = fs.readdirSync("./events");
 for (let i in eventFiles) {
   const eventFile = eventFiles[i];
   const eventName = eventFile.split(".").slice(0, -1).join(".");
-  import(`./events/${eventFile}`).then(event => {
-    client.on(eventName, event.default.bind(null, client));
-    console.log(`Registered event handler: ${eventName}`);
-  });
+  const event = await import(`./events/${eventFile}`)
+  client.on(eventName, event.default.bind(null, client));
+  console.log(`Registered event handler: ${eventName}`);
 }
 
 client.connect();

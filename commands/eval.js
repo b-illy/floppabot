@@ -9,7 +9,7 @@ export default {
             required: true
         }
     ],
-    run: (client, interaction, message, member, channel) => {
+    run: async (client, interaction, message, member, channel) => {
         if (member.id != process.env.OWNER) {
             return { content: "This command is only for the bot owner" };
         } else {
@@ -21,7 +21,7 @@ export default {
             }
 
             try {
-                const evaled = eval(code);
+                const evaled = await eval(code);
                 const output = `\`\`\`js\n${evaled}\n\`\`\``;
                 if (output.length >= 2000) {
                     return {

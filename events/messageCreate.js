@@ -1,4 +1,4 @@
-export default (client, message) => {
+export default async (client, message) => {
     if (!message.content.startsWith(process.env.PREFIX) || message.author.bot) {
         return;
     } else {
@@ -9,7 +9,7 @@ export default (client, message) => {
 
         if (client.commands.get(command)) {
             // if content is string, convert to object
-            let content = client.commands.get(command).run(client, null, message, message.member, message.channel).content;
+            let content = (await client.commands.get(command).run(client, null, message, message.member, message.channel)).content;
             if (typeof content == "string") {
                 content = {
                     content: content
@@ -25,7 +25,7 @@ export default (client, message) => {
                 // content
                 content,
                 // file
-                client.commands.get(command).run(client, null, message, message.member, message.channel).file ?? null
+                (await client.commands.get(command).run(client, null, message, message.member, message.channel)).file ?? null
             );
         } else {
             return;

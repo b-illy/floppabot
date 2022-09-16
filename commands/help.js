@@ -2,7 +2,7 @@ export default {
     name: "help",
     description: "lists all available commands",
     options: [],
-    run: (client, interaction, message, member, channel) => {
+    run: async (client, interaction, message, member, channel) => {
         // add all commands into an array
         let commandArr = [];
         client.commands.forEach(c => {

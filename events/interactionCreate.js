@@ -1,4 +1,4 @@
-export default (client, i) => {
+export default async (client, i) => {
     switch (i.type) {
         case 1:  // ping
             console.log("ping received");
@@ -8,14 +8,13 @@ export default (client, i) => {
                 i.createMessage("Command no longer exists");
                 return;
             }
-            i.acknowledge().then(() => {
-                i.createFollowup(
-                    // content
-                    client.commands.get(i.data.name).run(client, i, null, i.member, i.channel).content,
-                    // file
-                    client.commands.get(i.data.name).run(client, i, null, i.member, i.channel).file ?? null
-                );
-            });
+            await i.acknowledge();
+            i.createFollowup(
+                // content
+                (await client.commands.get(i.data.name).run(client, i, null, i.member, i.channel)).content,
+                // file
+                (await client.commands.get(i.data.name).run(client, i, null, i.member, i.channel)).file ?? null
+            );
             break;
         case 3:  // message component
             console.log("message component update received");
