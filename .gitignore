@@ -1,3 +1,10 @@
+# github stuff
+README.md
+LICENSE
+
+# don't leak tokens
 .env
+
+# annoying unnecessary files
 package-lock.json
 node_modules/
