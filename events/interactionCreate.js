@@ -9,11 +9,10 @@ export default async (client, i) => {
                 return;
             }
             await i.acknowledge();
+            const res = await client.commands.get(i.data.name).run(client, i, null, i.member, i.channel)
             i.createFollowup(
-                // content
-                (await client.commands.get(i.data.name).run(client, i, null, i.member, i.channel)).content,
-                // file
-                (await client.commands.get(i.data.name).run(client, i, null, i.member, i.channel)).file ?? null
+                res.content,
+                res.file ?? null
             );
             break;
         case 3:  // message component

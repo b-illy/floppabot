@@ -9,23 +9,21 @@ export default async (client, message) => {
 
         if (client.commands.get(command)) {
             // if content is string, convert to object
-            let content = (await client.commands.get(command).run(client, null, message, message.member, message.channel)).content;
-            if (typeof content == "string") {
-                content = {
-                    content: content
+            let res = await client.commands.get(command).run(client, null, message, message.member, message.channel);
+            if (typeof res.content == "string") {
+                res.content = {
+                    content: res.content
                 }
             }
             // add content.messageReference to make this message a reply
-            content.messageReference = {
+            res.content.messageReference = {
                 messageID: message.id,
                 failIfNotExists: false
             };
 
             message.channel.createMessage(
-                // content
-                content,
-                // file
-                (await client.commands.get(command).run(client, null, message, message.member, message.channel)).file ?? null
+                res.content,
+                res.file ?? null
             );
         } else {
             return;
