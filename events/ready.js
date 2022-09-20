@@ -1,7 +1,8 @@
 import fs from "fs";
 
 export default async (client) => {
-    console.log(`Now ready on ${client.user.username}#${client.user.discriminator}, loading commands...`);
+    console.log(`Now ready on ${client.user.username}#${client.user.discriminator}, guilds: ${client.guilds.size}`);
+    console.log("Loading commands...");
     
     // register/load commands from commands directory
     const commandFiles = fs.readdirSync("./commands");

@@ -1,7 +1,8 @@
 export default async (client, i) => {
     switch (i.type) {
         case 1:  // ping
-            console.log("ping received");
+            console.log("ping interaction received");
+            i.acknowledge();
             break;
         case 2:  // application command
             if(!client.commands.get(i.data.name)) {  // command not found and does not exist
@@ -16,7 +17,7 @@ export default async (client, i) => {
             );
             break;
         case 3:  // message component
-            console.log("message component update received");
+            console.log("WARNING: message component update received, but this is not yet implemented");
             break;
         default:
             throw new Error("unknown interaction type");
