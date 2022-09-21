@@ -90,7 +90,7 @@ export default {
                         },
                         {
                             name: "Roles:",
-                            value: targetInGuild ? roles.join(", ") : "N/A"
+                            value: targetInGuild ? ( roles.length != 0 ? roles.join(", ") : "No roles") : "N/A"
                         }
                     ]
                 }
