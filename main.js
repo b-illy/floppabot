@@ -12,7 +12,6 @@ import fs from "fs";
 */
 
 console.log("Starting...");
-
 // dotenv config -- import variables from .env file
 config();
 // main eris bot setup
@@ -47,7 +46,7 @@ const eventFiles = fs.readdirSync("./events");
 for (let i in eventFiles) {
   const eventFile = eventFiles[i];
   const eventName = eventFile.split(".").slice(0, -1).join(".");
-  const event = await import(`./events/${eventFile}`)
+  const event = await import(`./events/${eventFile}`);
   client.on(eventName, event.default.bind(null, client));
   console.log(`Registered event handler: ${eventName}`);
 }
