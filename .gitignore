@@ -1,7 +1,3 @@
-# github stuff
-README.md
-LICENSE
-
 # don't leak tokens
 .env
 
