@@ -22,9 +22,12 @@ export default {
         // construct output message
         let output = "All commands:```\n";
         for (let i in commandArr) {
-            output += `${process.env.PREFIX}${commandArr[i].name} - ${commandArr[i].description}\n`;
+            output += `${commandArr[i].name} - ${commandArr[i].description}\n`;
         }
         output = output.slice(0, -1) + "```";  // remove trailing newline and close code block
+
+        // classic command help
+        if (process.env.ENABLE_CLASSIC_COMMANDS != 0) output = `Classic commands are enabled -- my prefix is ${process.env.PREFIX}\n` + output;
 
         return { content: output };
     }
