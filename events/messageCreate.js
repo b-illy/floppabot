@@ -6,6 +6,7 @@ export default async (client, message) => {
         let command = args.shift().substring(process.env.PREFIX.length);
 
         message.args = args;
+        message.command = command;
 
         if (client.commands.get(command)) {
             try {
