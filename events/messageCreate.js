@@ -1,5 +1,5 @@
 export default async (client, message) => {
-    if (!message.content.startsWith(process.env.PREFIX) || message.author.bot) {
+    if (!message.content.startsWith(process.env.PREFIX) || message.author.bot || process.env.ENABLE_CLASSIC_COMMANDS == 0) {
         return;
     } else {
         let args = message.content.split(" ");
