@@ -21,6 +21,22 @@ export default {
                 {
                     name: "sha256",
                     value: "sha256"
+                },
+                {
+                    name: "sha512",
+                    value: "sha512"
+                },
+                {
+                    name: "hmac sha256",
+                    value: "hmac sha256"
+                },
+                {
+                    name: "hmac sha512",
+                    value: "hmac sha512"
+                },
+                {
+                    name: "md5 (insecure!)",
+                    value: "md5"
                 }
             ],
         },
@@ -65,10 +81,22 @@ export default {
             case "sha256":
                 output = CryptoJS.SHA256(input);
                 break;
+            case "sha512":
+                output = CryptoJS.SHA512(input);
+                break;
+            case "hmac sha256":
+                output = CryptoJS.HmacSHA256(input);
+                break;
+            case "hmac sha512":
+                output = CryptoJS.HmacSHA256(input);
+                break;
+            case "md5":
+                output = CryptoJS.MD5(input);
+                break;
             default:
                 throw new Error("Unknown mode for crypto command");
         }
 
-        return { content: `Output of ${mode}:\n\`\`\`${output}\`\`\`` };
+        return { content: `Output of ${mode}:\`\`\`${output}\`\`\`` };
     }
 }
