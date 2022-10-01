@@ -2,6 +2,10 @@ import fs from "fs";
 
 export default async (client) => {
     console.log(`Now ready on ${client.user.username}#${client.user.discriminator}, guilds: ${client.guilds.size}`);
+    client.editStatus("online", {
+        name: `for /help${process.env.ENABLE_CLASSIC_COMMANDS != 0 ? ` or ${process.env.PREFIX}help` : ""}`,
+        type: 3  // watching
+    });
     console.log("Loading commands...");
     
     // register/load commands from commands directory
