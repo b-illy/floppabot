@@ -2,11 +2,11 @@ import CryptoJS from "crypto-js";
 
 export default {
     name: "crypto",
-    description: "various crypto functions such as sha2 hashing and base64 encode/decode",
+    description: "various crypto functions such as sha2, base64, and aes",
     options: [
         {
             name: "textonly",
-            description: "crypto functions that act on a single input only",
+            description: "crypto functions that act on a single input string only",
             type: 1,  // subcommand
             options: [
                 {
@@ -47,7 +47,7 @@ export default {
         },
         {
             name: "withsecret",
-            description: "more secure crypto functions that take an input and a secret passphrase",
+            description: "more secure crypto functions that take both an input and a secret passphrase",
             type: 1,  // subcommand
             options: [
                 {
