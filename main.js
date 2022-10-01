@@ -24,7 +24,7 @@ const client = new Eris(process.env.TOKEN, {
   allowedMentions: {
     everyone: false,
     roles: false,
-    repliedUser: true
+    repliedUser: false
   },
   defaultImageFormat: "png",
   defaultImageSize: 1024,
