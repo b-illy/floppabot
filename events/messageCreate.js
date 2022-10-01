@@ -9,6 +9,7 @@ export default async (client, message) => {
         message.command = command;
 
         if (client.commands.get(command)) {
+            client.logger.verbose(`Classic command ${command} used by ${message.member.username}#${message.member.discriminator} (${message.member.id})`);
             try {
                 // run the command and store the outputted message
                 let res = await client.commands.get(command).run(client, null, message, message.member, message.channel);
@@ -37,7 +38,7 @@ export default async (client, message) => {
                         failIfNotExists: false
                     }
                 });
-                console.error(err);
+                client.logger.error(err.stack);
             }
         } else {
             return;

@@ -1,7 +1,7 @@
 export default async (client, i) => {
     switch (i.type) {
         case 1:  // ping
-            console.log("ping interaction received");
+            client.logger.verbose("ping interaction received");
             i.acknowledge();
             break;
         case 2:  // application command
@@ -9,6 +9,9 @@ export default async (client, i) => {
                 i.createMessage("Command no longer exists");
                 return;
             }
+
+            client.logger.verbose(`Slash command ${i.data.name} used by ${i.member.username}#${i.member.discriminator} (${i.member.id})`);
+
             // acknowledge command, giving the "waiting..." text response to show that it is working
             await i.acknowledge();
             try {
@@ -21,13 +24,13 @@ export default async (client, i) => {
                 );
             } catch (err) {
                 i.createFollowup("An error occured while running this command.");
-                console.error(err);
+                client.logger.error(err.stack);
             }
             break;
         case 3:  // message component
-            console.log("WARNING: message component update received, but this is not yet implemented");
+            client.logger.warn("message component update received, but this is not yet implemented");
             break;
         default:
-            throw new Error("unknown interaction type");
+            client.logger.error(new Error("unknown interaction type").stack);
     }
 }
