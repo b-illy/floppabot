@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node main.js"
   },
-  "author": "billy",
+  "author": "https://github.com/b-illy",
   "license": "MIT",
   "dependencies": {
     "crypto-js": "^4.1.1",
